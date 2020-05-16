@@ -4,6 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
+    "start-demo": "ng serve ngx-table-app",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
@@ -13,6 +14,7 @@
   "private": true,
   "dependencies": {
     "@angular/animations": "~9.1.7",
+    "@angular/cdk": "^9.2.3",
     "@angular/common": "~9.1.7",
     "@angular/compiler": "~9.1.7",
     "@angular/core": "~9.1.7",

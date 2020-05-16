@@ -1,0 +1,43 @@
+<table
+  class="table"
+  cdk-table
+  [dataSource]="tableData$"
+  [trackBy]="trackData"
+  [class.table-sm]="size === 'sm'"
+  [class.table-lg]="size === 'lg'"
+>
+  <ng-container *ngFor="let key of headerKeys$ | async">
+    <ng-container [cdkColumnDef]="key">
+      <th cdk-header-cell *cdkHeaderCellDef>
+        <ngx-table-header-cell [label]="columns[key].label" [order]="columns[key].order" (sortClick)="sortRecords(key, $event)"></ngx-table-header-cell>
+      </th>
+      <td cdk-cell *cdkCellDef="let row">
+        <ng-container [ngSwitch]="columns[key].type">
+          <ng-container *ngSwitchCase="'link'">
+            <a class="pointer" (click)="onColumnTextClick(key, row)">{{ row[key] }}</a>
+          </ng-container>
+          <ng-container *ngSwitchCase="'date'">
+            {{ row[key] | date }}
+          </ng-container>
+          <ng-container *ngSwitchCase="'currency'">
+            {{ row[key] | currency: 'USD' }}
+          </ng-container>
+          <ng-container *ngSwitchCase="'number'">
+            {{ row[key] | number }}
+          </ng-container>
+          <ng-container *ngSwitchCase="'percent'">
+            {{ row[key] | percent }}
+          </ng-container>
+          <ng-container *ngSwitchDefault>
+            {{ row[key] }}
+          </ng-container>
+        </ng-container>
+      </td>
+    </ng-container>
+  </ng-container>
+
+  <!-- Header and Row Declarations -->
+  <tr cdk-header-row *cdkHeaderRowDef="headerKeys$ | async; sticky: true" class="users-table-header-row"></tr>
+  <tr cdk-row *cdkRowDef="let row; columns: headerKeys$ | async" (click)="onRowClick(row)" [class.pointer]="enableRowClick"></tr>
+</table>
+<ngx-paginator [activePage]="pagination.page" [totalRecords]="pagination.totalRecords" [pageSize]="pagination.size" (onPageChange)="changePage($event)"></ngx-paginator>

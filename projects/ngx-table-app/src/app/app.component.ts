@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { COLUMNS, EXAMPLE_DATA } from './model';
+import { ColumnsTable } from '../../../ngx-table/src/lib/ngx-table.model';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +9,6 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'ngx-table-app';
+  data: any[] = EXAMPLE_DATA;
+  columns: ColumnsTable = COLUMNS;
 }

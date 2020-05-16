@@ -1,0 +1,7 @@
+<span class="header-cell" (click)="onSortClick()">
+  {{ label }}
+  <ng-container [ngSwitch]="order">
+    <span *ngSwitchCase="'asc'">▲</span>
+    <span *ngSwitchCase="'desc'">▼</span>
+  </ng-container>
+</span>
